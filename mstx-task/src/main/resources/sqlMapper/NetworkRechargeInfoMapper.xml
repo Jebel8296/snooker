@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mstx.framework.task.mapper.NetworkRechargeInfoMapper">
+  <resultMap id="BaseResultMap" type="com.mstx.framework.task.dao.NetworkRechargeInfo">
+    <id column="RID" jdbcType="VARCHAR" property="rid" />
+    <result column="PHONENUM" jdbcType="VARCHAR" property="phonenum" />
+    <result column="RECHARGE" jdbcType="DECIMAL" property="recharge" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="LIMIT_TIMES" jdbcType="TIMESTAMP" property="limitTimes" />
+    <result column="PAY_STATUS" jdbcType="VARCHAR" property="payStatus" />
+    <result column="PAY_TIME" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="PAY_CHANNEL" jdbcType="VARCHAR" property="payChannel" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    RID, PHONENUM, RECHARGE, CREATE_TIME, UPDATE_TIME, REMARK, STATUS, LIMIT_TIMES, PAY_STATUS, 
+    PAY_TIME, PAY_CHANNEL
+  </sql>
+  <select id="selectByExample" parameterType="com.mstx.framework.task.dao.NetworkRechargeInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from NETWORK_RECHARGE_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from NETWORK_RECHARGE_INFO
+    where RID = #{rid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from NETWORK_RECHARGE_INFO
+    where RID = #{rid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mstx.framework.task.dao.NetworkRechargeInfoExample">
+    delete from NETWORK_RECHARGE_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mstx.framework.task.dao.NetworkRechargeInfo">
+    insert into NETWORK_RECHARGE_INFO (RID, PHONENUM, RECHARGE, 
+      CREATE_TIME, UPDATE_TIME, REMARK, 
+      STATUS, LIMIT_TIMES, PAY_STATUS, 
+      PAY_TIME, PAY_CHANNEL)
+    values (#{rid,jdbcType=VARCHAR}, #{phonenum,jdbcType=VARCHAR}, #{recharge,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{limitTimes,jdbcType=TIMESTAMP}, #{payStatus,jdbcType=VARCHAR}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{payChannel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mstx.framework.task.dao.NetworkRechargeInfo">
+    insert into NETWORK_RECHARGE_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        RID,
+      </if>
+      <if test="phonenum != null">
+        PHONENUM,
+      </if>
+      <if test="recharge != null">
+        RECHARGE,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="limitTimes != null">
+        LIMIT_TIMES,
+      </if>
+      <if test="payStatus != null">
+        PAY_STATUS,
+      </if>
+      <if test="payTime != null">
+        PAY_TIME,
+      </if>
+      <if test="payChannel != null">
+        PAY_CHANNEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null">
+        #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="recharge != null">
+        #{recharge,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="limitTimes != null">
+        #{limitTimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payStatus != null">
+        #{payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payChannel != null">
+        #{payChannel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mstx.framework.task.dao.NetworkRechargeInfoExample" resultType="java.lang.Long">
+    select count(*) from NETWORK_RECHARGE_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update NETWORK_RECHARGE_INFO
+    <set>
+      <if test="record.rid != null">
+        RID = #{record.rid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phonenum != null">
+        PHONENUM = #{record.phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recharge != null">
+        RECHARGE = #{record.recharge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.limitTimes != null">
+        LIMIT_TIMES = #{record.limitTimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payStatus != null">
+        PAY_STATUS = #{record.payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payTime != null">
+        PAY_TIME = #{record.payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payChannel != null">
+        PAY_CHANNEL = #{record.payChannel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update NETWORK_RECHARGE_INFO
+    set RID = #{record.rid,jdbcType=VARCHAR},
+      PHONENUM = #{record.phonenum,jdbcType=VARCHAR},
+      RECHARGE = #{record.recharge,jdbcType=DECIMAL},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      LIMIT_TIMES = #{record.limitTimes,jdbcType=TIMESTAMP},
+      PAY_STATUS = #{record.payStatus,jdbcType=VARCHAR},
+      PAY_TIME = #{record.payTime,jdbcType=TIMESTAMP},
+      PAY_CHANNEL = #{record.payChannel,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mstx.framework.task.dao.NetworkRechargeInfo">
+    update NETWORK_RECHARGE_INFO
+    <set>
+      <if test="phonenum != null">
+        PHONENUM = #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="recharge != null">
+        RECHARGE = #{recharge,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="limitTimes != null">
+        LIMIT_TIMES = #{limitTimes,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payStatus != null">
+        PAY_STATUS = #{payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payChannel != null">
+        PAY_CHANNEL = #{payChannel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RID = #{rid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mstx.framework.task.dao.NetworkRechargeInfo">
+    update NETWORK_RECHARGE_INFO
+    set PHONENUM = #{phonenum,jdbcType=VARCHAR},
+      RECHARGE = #{recharge,jdbcType=DECIMAL},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      LIMIT_TIMES = #{limitTimes,jdbcType=TIMESTAMP},
+      PAY_STATUS = #{payStatus,jdbcType=VARCHAR},
+      PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+      PAY_CHANNEL = #{payChannel,jdbcType=VARCHAR}
+    where RID = #{rid,jdbcType=VARCHAR}
+  </update>
+</mapper>

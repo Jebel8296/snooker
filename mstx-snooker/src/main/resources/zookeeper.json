@@ -1,0 +1,8 @@
+{
+  "zookeeperHosts": "172.30.87.74",
+  "rootPath": "mstx/microservice",
+  "retry": {
+    "initialSleepTime": 3000,
+    "maxTimes": 3
+  }
+}

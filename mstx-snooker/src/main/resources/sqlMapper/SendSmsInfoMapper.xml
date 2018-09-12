@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mstx.framework.user.mapper.SendSmsInfoMapper">
+  <resultMap id="BaseResultMap" type="com.mstx.framework.user.dao.SendSmsInfo">
+    <id column="MID" jdbcType="VARCHAR" property="mid" />
+    <result column="PHONENUM" jdbcType="VARCHAR" property="phonenum" />
+    <result column="VERFY_CODE" jdbcType="VARCHAR" property="verfyCode" />
+    <result column="SMS_MSG" jdbcType="VARCHAR" property="smsMsg" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    MID, PHONENUM, VERFY_CODE, SMS_MSG, CREATE_TIME, REMARK
+  </sql>
+  <select id="selectByExample" parameterType="com.mstx.framework.user.dao.SendSmsInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SEND_SMS_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SEND_SMS_INFO
+    where MID = #{mid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SEND_SMS_INFO
+    where MID = #{mid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mstx.framework.user.dao.SendSmsInfoExample">
+    delete from SEND_SMS_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mstx.framework.user.dao.SendSmsInfo">
+    insert into SEND_SMS_INFO (MID, PHONENUM, VERFY_CODE, 
+      SMS_MSG, CREATE_TIME, REMARK
+      )
+    values (#{mid,jdbcType=VARCHAR}, #{phonenum,jdbcType=VARCHAR}, #{verfyCode,jdbcType=VARCHAR}, 
+      #{smsMsg,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mstx.framework.user.dao.SendSmsInfo">
+    insert into SEND_SMS_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        MID,
+      </if>
+      <if test="phonenum != null">
+        PHONENUM,
+      </if>
+      <if test="verfyCode != null">
+        VERFY_CODE,
+      </if>
+      <if test="smsMsg != null">
+        SMS_MSG,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        #{mid,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null">
+        #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="verfyCode != null">
+        #{verfyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="smsMsg != null">
+        #{smsMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mstx.framework.user.dao.SendSmsInfoExample" resultType="java.lang.Long">
+    select count(*) from SEND_SMS_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SEND_SMS_INFO
+    <set>
+      <if test="record.mid != null">
+        MID = #{record.mid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phonenum != null">
+        PHONENUM = #{record.phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.verfyCode != null">
+        VERFY_CODE = #{record.verfyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smsMsg != null">
+        SMS_MSG = #{record.smsMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SEND_SMS_INFO
+    set MID = #{record.mid,jdbcType=VARCHAR},
+      PHONENUM = #{record.phonenum,jdbcType=VARCHAR},
+      VERFY_CODE = #{record.verfyCode,jdbcType=VARCHAR},
+      SMS_MSG = #{record.smsMsg,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mstx.framework.user.dao.SendSmsInfo">
+    update SEND_SMS_INFO
+    <set>
+      <if test="phonenum != null">
+        PHONENUM = #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="verfyCode != null">
+        VERFY_CODE = #{verfyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="smsMsg != null">
+        SMS_MSG = #{smsMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MID = #{mid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mstx.framework.user.dao.SendSmsInfo">
+    update SEND_SMS_INFO
+    set PHONENUM = #{phonenum,jdbcType=VARCHAR},
+      VERFY_CODE = #{verfyCode,jdbcType=VARCHAR},
+      SMS_MSG = #{smsMsg,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where MID = #{mid,jdbcType=VARCHAR}
+  </update>
+</mapper>
